@@ -1,0 +1,100 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Gestion des Étudiants</h2>
+
+  <!-- Form -->
+  <form (submit)="saveEtudiant(); $event.preventDefault()" class="mb-4">
+    <div class="form-group">
+      <label for="nom">Nom</label>
+      <input
+        type="text"
+        id="nom"
+        class="form-control"
+        [(ngModel)]="currentEtudiant.nom"
+        name="nom"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="prenom">Prénom</label>
+      <input
+        type="text"
+        id="prenom"
+        class="form-control"
+        [(ngModel)]="currentEtudiant.prenom"
+        name="prenom"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        [(ngModel)]="currentEtudiant.email"
+        name="email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="classe">Classe</label>
+      <input
+        type="text"
+        id="classe"
+        class="form-control"
+        [(ngModel)]="currentEtudiant.classe"
+        name="classe"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="dateNaissance">Date de Naissance</label>
+      <input
+        type="date"
+        id="dateNaissance"
+        class="form-control"
+        [(ngModel)]="currentEtudiant.dateNaissance"
+        name="dateNaissance"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">
+      {{ selectedEtudiant ? 'Modifier' : 'Ajouter' }}
+    </button>
+    <button type="button" class="btn btn-secondary mt-3 ml-2" (click)="resetForm()">
+      Annuler
+    </button>
+  </form>
+
+  <!-- Table -->
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Email</th>
+      <th>Classe</th>
+      <th>Date de Naissance</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td>{{ etudiant.nom }}</td>
+      <td>{{ etudiant.prenom }}</td>
+      <td>{{ etudiant.email }}</td>
+      <td>{{ etudiant.classe }}</td>
+      <td>{{ etudiant.dateNaissance }}</td>
+      <td>
+        <button class="btn btn-warning btn-sm" (click)="selectEtudiant(etudiant)">Modifier</button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteEtudiant(etudiant.id!)"
+        >
+          Supprimer
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

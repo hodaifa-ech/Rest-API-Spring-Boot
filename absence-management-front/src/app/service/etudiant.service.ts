@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Etudiant } from '../models/etudiant';
+
+export interface Etudiant {
+  id?: number;
+  nom: string;
+  prenom: string;
+  email: string;
+  classe: string;
+  dateNaissance: Date;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EtudiantService {
   private apiUrl = 'http://localhost:8081/api/etudiants';
@@ -12,7 +20,7 @@ export class EtudiantService {
   constructor(private http: HttpClient) {}
 
   getAllEtudiants(): Observable<Etudiant[]> {
-    return this.http.get<Etudiant[]>(`${this.apiUrl}`);
+    return this.http.get<Etudiant[]>(this.apiUrl);
   }
 
   getEtudiantById(id: number): Observable<Etudiant> {
@@ -29,9 +37,5 @@ export class EtudiantService {
 
   deleteEtudiant(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  searchEtudiants(keyword: string): Observable<Etudiant[]> {
-    return this.http.get<Etudiant[]>(`${this.apiUrl}/search?keyword=${keyword}`);
   }
 }

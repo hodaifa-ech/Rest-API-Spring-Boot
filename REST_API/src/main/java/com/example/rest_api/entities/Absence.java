@@ -1,4 +1,5 @@
 package com.example.rest_api.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,5 +23,6 @@ public class Absence {
     private String description;
 
     @ManyToOne
+    @JsonBackReference // Ignores the back-reference during serialization
     private Etudiant etudiant;
 }

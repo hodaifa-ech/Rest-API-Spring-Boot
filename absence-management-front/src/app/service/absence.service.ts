@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Absence } from '../models/absence';
+
+export interface Absence {
+  id: number;
+  dateAbsence: string;
+  justification: string;
+  justified: boolean;
+  description: string;
+  etudiantId?: number; // Link to Etudiant
+}
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +27,10 @@ export class AbsenceService {
     return this.http.get<Absence>(`${this.apiUrl}/${id}`);
   }
 
+  getAbsencesByEtudiant(etudiantId: number): Observable<Absence[]> {
+    return this.http.get<Absence[]>(`${this.apiUrl}/etudiant/${etudiantId}`);
+  }
+
   createAbsence(absence: Absence): Observable<Absence> {
     return this.http.post<Absence>(this.apiUrl, absence);
   }
@@ -29,15 +41,5 @@ export class AbsenceService {
 
   deleteAbsence(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  getAbsencesByEtudiant(etudiantId: number): Observable<Absence[]> {
-    return this.http.get<Absence[]>(`${this.apiUrl}/etudiant/${etudiantId}`);
-  }
-
-  getAbsencesByPeriode(debut: string, fin: string): Observable<Absence[]> {
-    return this.http.get<Absence[]>(
-      `${this.apiUrl}?debut=${debut}&fin=${fin}`
-    );
   }
 }

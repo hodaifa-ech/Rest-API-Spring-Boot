@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <h1 class="text-center">Absence Management</h1>
+
+  <button class="btn btn-success mb-3" (click)="addNewAbsence()">Add Absence</button>
+
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Justification</th>
+      <th>Justified</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let absence of absences">
+      <td>{{ absence.id }}</td>
+      <td>{{ absence.dateAbsence }}</td>
+      <td>{{ absence.justification }}</td>
+      <td>{{ absence.justified ? 'Yes' : 'No' }}</td>
+      <td>{{ absence.description }}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="selectAbsence(absence)">Edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteAbsence(absence.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="selectedAbsence" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Absence Form</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="selectedAbsence = null"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="dateAbsence" class="form-label">Date</label>
+              <input type="date" id="dateAbsence" [(ngModel)]="selectedAbsence.dateAbsence" name="dateAbsence" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="justification" class="form-label">Justification</label>
+              <input type="text" id="justification" [(ngModel)]="selectedAbsence.justification" name="justification" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="justified" class="form-label">Justified</label>
+              <select id="justified" [(ngModel)]="selectedAbsence.justified" name="justified" class="form-control">
+                <option [value]="true">Yes</option>
+                <option [value]="false">No</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea id="description" [(ngModel)]="selectedAbsence.description" name="description" class="form-control"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="selectedAbsence = null">Cancel</button>
+          <button class="btn btn-primary" (click)="saveAbsence()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
