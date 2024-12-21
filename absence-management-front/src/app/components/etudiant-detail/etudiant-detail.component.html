@@ -1,0 +1,22 @@
+<div class="container mx-auto mt-5">
+  <h1 class="text-2xl font-bold mb-4">Create/Edit Etudiant</h1>
+  <form (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label for="nom" class="block text-sm font-medium">Nom</label>
+      <input id="nom" type="text" [(ngModel)]="etudiant.nom" name="nom" class="border rounded w-full px-3 py-2">
+    </div>
+    <div>
+      <label for="prenom" class="block text-sm font-medium">Prenom</label>
+      <input id="prenom" type="text" [(ngModel)]="etudiant.prenom" name="prenom" class="border rounded w-full px-3 py-2">
+    </div>
+    <div>
+      <label for="email" class="block text-sm font-medium">Email</label>
+      <input id="email" type="email" [(ngModel)]="etudiant.email" name="email" class="border rounded w-full px-3 py-2">
+    </div>
+    <div>
+      <label for="classe" class="block text-sm font-medium">Classe</label>
+      <input id="classe" type="text" [(ngModel)]="etudiant.classe" name="classe" class="border rounded w-full px-3 py-2">
+    </div>
+    <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Submit</button>
+  </form>
+</div>

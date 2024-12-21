@@ -1,0 +1,27 @@
+<div class="container mx-auto mt-5">
+  <h1 class="text-2xl font-bold mb-4">List of Students</h1>
+  <table class="table-auto w-full border-collapse border border-gray-300">
+    <thead>
+    <tr class="bg-gray-200">
+      <th class="border px-4 py-2">ID</th>
+      <th class="border px-4 py-2">Name</th>
+      <th class="border px-4 py-2">Email</th>
+      <th class="border px-4 py-2">Class</th>
+      <th class="border px-4 py-2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td class="border px-4 py-2">{{ etudiant.id }}</td>
+      <td class="border px-4 py-2">{{ etudiant.nom }} {{ etudiant.prenom }}</td>
+      <td class="border px-4 py-2">{{ etudiant.email }}</td>
+      <td class="border px-4 py-2">{{ etudiant.classe }}</td>
+      <td class="border px-4 py-2">
+        <a [routerLink]="['/etudiants', etudiant.id]" class="text-blue-500">View</a> |
+        <a [routerLink]="['/etudiants', etudiant.id]" class="text-blue-500">Edit</a> |
+        <button (click)="deleteEtudiant(etudiant.id)" class="text-red-500">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
